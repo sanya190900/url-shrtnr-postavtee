@@ -1,11 +1,11 @@
-# {Team Name} - URL shortener {🧪}
+# PostavteE - URL shortener {🧪}
 
 This is a template project for "Software testing" course labs. Use it to create your own repo and 
 fulfill/rewrite this document (at least, replace everything in `{...}`).
 
 ## Students group
 
-- Парубець Любов lthreeblog@gmail.com
+- Парубець Любов (team lead) lthreeblog@gmail.com
 - Підчасюк Ганна azaychenko1999@gmail.com
 - Вінніченко Валерія vinnichenkovaleriaa@gmail.com
 - Сапаров Санджар sanjar.saparov@gmail.com
