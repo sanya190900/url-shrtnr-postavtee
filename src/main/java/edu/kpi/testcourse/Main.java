@@ -16,7 +16,6 @@ public class Main {
 
   public static void main(String[] args) {
     logger.info("Hello world!");
-//    logger.info("Hello world!");
     Micronaut.run(Main.class, args );
   }
 
