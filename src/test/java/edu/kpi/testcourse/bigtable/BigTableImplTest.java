@@ -33,4 +33,14 @@ class BigTableImplTest {
     assertThat(urlConversion.toLong(value)).isEqualTo(1000);
   }
 
+  @Test
+  void checkUrlConvertToShort() {
+    // для функції convertToShort() в класі UrlLogic.
+  }
+
+  @Test
+  void checkUrlConvertToLong() {
+    // для функції convertToLong() в класі UrlLogic.
+  }
+
 }
