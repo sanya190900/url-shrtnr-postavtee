@@ -12,14 +12,13 @@ public class UrlConversion {
   private int base = allowedCharacters.length;
 
   /**
-   * Функція яка перетворює довге посилання в коротке.
+   * Функція яка створює короткий аліас.
    *
    * @param input - довге посилання яке дає користувач.
-   * @return result - короткий лінк.
+   * @return - короткий аліас.
    */
   public String toShort(long input) {
     var encodedString = new StringBuilder();
-    var result = new String();
 
     if (input == 0) {
       return String.valueOf(allowedCharacters[0]);
@@ -30,28 +29,26 @@ public class UrlConversion {
       input = input / base;
     }
 
-    result = encodedString.reverse().toString();
-
-    return result;
+    return encodedString.reverse().toString();
   }
 
   /**
-   * Функція яка перетворює коротке посилання на довге.
+   * Функція яка повертає унікальний ІД посилання.
    *
-   * @param input - коротке посилання яке потрібно збільшити.
-   * @return longUrl - довгий лінк.
+   * @param input - короткий аліас який потрібно збільшити.
+   * @return idUrl - айді посилання.
    */
   public long toLong(String input) {
     var characters = input.toCharArray();
     var length = characters.length;
-    var longUrl = 0;
+    var idUrl = 0;
 
     //counter is used to avoid reversing input string
     var counter = 1;
     for (int i = 0; i < length; i++) {
-      longUrl += allowedString.indexOf(characters[i]) * Math.pow(base, length - counter);
+      idUrl += allowedString.indexOf(characters[i]) * Math.pow(base, length - counter);
       counter++;
     }
-    return longUrl;
+    return idUrl;
   }
 }
