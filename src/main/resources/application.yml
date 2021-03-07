@@ -2,13 +2,22 @@ micronaut:
   application:
     name: test-course-template
   server:
+    port: 8080
     cors:
       enabled: true
+  http:
+    services:
+      userecho:
+        urls:
+          "http://localhost:8081"
   security:
     authentication: bearer
     token:
+      propagation:
+        enabled: true
+        service-id-regex: "userecho"
       jwt:
         signatures:
           secret:
             generator:
-              secret: supaDupaSecretThatNobodyWillKnow
+              secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:supaDupaSecretThatNobodyWillKnow}"'
