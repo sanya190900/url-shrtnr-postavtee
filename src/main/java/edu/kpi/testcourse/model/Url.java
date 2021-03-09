@@ -1,4 +1,4 @@
-package edu.kpi.testcourse.logic;
+package edu.kpi.testcourse.model;
 
 import java.util.Date;
 
