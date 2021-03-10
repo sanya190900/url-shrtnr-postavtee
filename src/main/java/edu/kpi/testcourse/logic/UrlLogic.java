@@ -1,5 +1,7 @@
 package edu.kpi.testcourse.logic;
 
+import edu.kpi.testcourse.model.Url;
+
 /**
  * Клас в якому реалізована основна логіка конвертування отриманого посилання.
  */
