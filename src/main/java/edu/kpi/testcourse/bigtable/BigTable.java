@@ -1,13 +1,26 @@
 package edu.kpi.testcourse.bigtable;
 
-// ⚠️ Please, pay attention, that you should not use any 3rd party persistence library (e.g. data
-// ⚠️ base, implementation of key-value storage, etc)
+import com.google.gson.JsonObject;
+import io.micronaut.security.token.jwt.render.BearerAccessRefreshToken;
+import java.util.Set;
 
 /**
  * BigTable is a key-value storage...
  */
 public interface BigTable {
-  void put(String key, String value);
+  void saveUserInDb(String key, JsonObject value);
 
-  String get(String key);
+  void saveUrlInDb(String key, String value);
+
+  void saveToken(String token);
+
+  Set<String> getTokens();
+
+  Integer getIdUrlFromDb();
+
+  JsonObject getUserFromDb(String key);
+
+  String getUrlFromDb(String key);
+
+  void delUrlFromDb(String key);
 }
