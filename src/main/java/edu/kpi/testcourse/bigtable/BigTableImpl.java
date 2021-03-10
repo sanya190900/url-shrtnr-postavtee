@@ -1,21 +1,60 @@
 package edu.kpi.testcourse.bigtable;
 
-import java.util.HashMap;
+import com.google.gson.JsonObject;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.HashSet;
 
-// ⚠️ Please, pay attention, that you should not use any 3rd party persistence library (e.g. data
-// ⚠️ base, implementation of key-value storage, etc)
+/**
+ * Custom database.
+ */
+public class BigTableImpl implements BigTable {
 
-class BigTableImpl implements BigTable {
-  private final Map<String, String> map = new HashMap<>();
+  public static final Map<String, JsonObject> dbUsers = new HashMap<>();
+  public static final Map<String, String> dbUrls = new HashMap<>();
+  public static final Set<String> dbTokens = new HashSet<>();
+
+  private static Integer idUrl = 1;
 
   @Override
-  public void put(String key, String value) {
-    map.put(key, value);
+  public void saveUserInDB(String key, JsonObject value) {
+    dbUsers.put(key, value);
   }
 
   @Override
-  public String get(String key) {
-    return map.get(key);
+  public void saveUrlInDB(String key, String value) {
+    dbUrls.put(key, value);
+    idUrl++;
+  }
+
+  @Override
+  public void saveToken(String token) {
+    dbTokens.add(token);
+  }
+
+  @Override
+  public Set<String> getTokens() {
+    return dbTokens;
+  }
+
+  @Override
+  public Integer getIdUrlFromDB() {
+    return idUrl;
+  }
+
+  @Override
+  public JsonObject getUserFromDB(String key) {
+    return dbUsers.get(key);
+  }
+
+  @Override
+  public String getUrlFromDB(String key) {
+    return dbUrls.get(key);
+  }
+
+  @Override
+  public void delUrlFromDB(String key) {
+    dbUrls.remove(key);
   }
 }

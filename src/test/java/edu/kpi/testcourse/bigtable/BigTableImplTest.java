@@ -2,6 +2,7 @@ package edu.kpi.testcourse.bigtable;
 
 import edu.kpi.testcourse.logic.UrlConversion;
 import org.junit.jupiter.api.Test;
+import com.google.gson.JsonObject;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -11,10 +12,10 @@ class BigTableImplTest {
   void checkValueSaving() {
     BigTableImpl bigTable = new BigTableImpl();
 
-    bigTable.put("testKey", "testValue");
-    String value = bigTable.get("testKey");
+    bigTable.putUser("testKey", object);
+    JsonObject = bigTable.getUser("testKey");
 
-    assertThat(value).isEqualTo("testValue");
+    assertThat(value).isEqualTo(object);
   }
 
   @Test
