@@ -1,10 +1,11 @@
 package edu.kpi.testcourse.bigtable;
 
 import com.google.gson.JsonObject;
-import java.util.Map;
-import java.util.Set;
+
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Custom database.
@@ -18,12 +19,12 @@ public class BigTableImpl implements BigTable {
   private static Integer idUrl = 1;
 
   @Override
-  public void saveUserInDB(String key, JsonObject value) {
+  public void saveUserInDb(String key, JsonObject value) {
     dbUsers.put(key, value);
   }
 
   @Override
-  public void saveUrlInDB(String key, String value) {
+  public void saveUrlInDb(String key, String value) {
     dbUrls.put(key, value);
     idUrl++;
   }
@@ -39,22 +40,22 @@ public class BigTableImpl implements BigTable {
   }
 
   @Override
-  public Integer getIdUrlFromDB() {
+  public Integer getIdUrlFromDb() {
     return idUrl;
   }
 
   @Override
-  public JsonObject getUserFromDB(String key) {
+  public JsonObject getUserFromDb(String key) {
     return dbUsers.get(key);
   }
 
   @Override
-  public String getUrlFromDB(String key) {
+  public String getUrlFromDb(String key) {
     return dbUrls.get(key);
   }
 
   @Override
-  public void delUrlFromDB(String key) {
+  public void delUrlFromDb(String key) {
     dbUrls.remove(key);
   }
 }

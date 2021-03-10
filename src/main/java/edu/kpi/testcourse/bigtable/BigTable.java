@@ -8,19 +8,19 @@ import java.util.Set;
  * BigTable is a key-value storage...
  */
 public interface BigTable {
-  void saveUserInDB(String key, JsonObject value);
+  void saveUserInDb(String key, JsonObject value);
 
-  void saveUrlInDB(String key, String value);
+  void saveUrlInDb(String key, String value);
 
   void saveToken(String token);
 
   Set<String> getTokens();
 
-  Integer getIdUrlFromDB();
+  Integer getIdUrlFromDb();
 
-  JsonObject getUserFromDB(String key);
+  JsonObject getUserFromDb(String key);
 
-  String getUrlFromDB(String key);
+  String getUrlFromDb(String key);
 
-  void delUrlFromDB(String key);
+  void delUrlFromDb(String key);
 }
