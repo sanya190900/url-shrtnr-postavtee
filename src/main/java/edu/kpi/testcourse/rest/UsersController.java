@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import edu.kpi.testcourse.Main;
 import edu.kpi.testcourse.bigtable.BigTableImpl;
-import edu.kpi.testcourse.logic.UserLogic;
+import edu.kpi.testcourse.logic.UrlAndUserActions;
 import edu.kpi.testcourse.model.User;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
@@ -26,16 +26,16 @@ import javax.inject.Inject;
 /**
  * Controller for accessing user's account.
  */
-
 @Controller("/users")
 public class UsersController {
   @Inject
   @Client("/")
   RxHttpClient client;
-//  BigTableImpl bigTable = new BigTableImpl();
 
   /**
    * Method with request for signing up.
+   *
+   *
    */
   @Secured(SecurityRule.IS_ANONYMOUS)
   @Post(value = "/signup",
@@ -50,7 +50,7 @@ public class UsersController {
       return HttpResponse.badRequest("No email specified");
     }
     user.setIdUser(UUID.randomUUID().toString());
-    boolean response = UserLogic.createUser(user);
+    boolean response = UrlAndUserActions.createUser(user);
     if (response) {
       return HttpResponse.created("User with email \"" + user.getEmail() + "\" was created.");
     } else {
@@ -60,6 +60,8 @@ public class UsersController {
 
   /**
    * Method with request for signing in.
+   *
+   *
    */
   @Secured(SecurityRule.IS_ANONYMOUS)
   @Post(value = "/signin",
@@ -86,9 +88,9 @@ public class UsersController {
 
     HttpResponse<String> httpResponse;
 
-    boolean response = UserLogic.findUserByEmail(user.getEmail());
-    if (response) {
-      boolean isPasswordValid = UserLogic.checkPassword(user.getEmail(), user.getPassw());
+    User response = UrlAndUserActions.findUserByEmail(user.getEmail());
+    if (response != null) {
+      boolean isPasswordValid = UrlAndUserActions.checkPassw(user.getEmail(), user.getPassw());
       if (isPasswordValid) {
         HttpRequest request = HttpRequest.POST("/login", credentials);
         httpResponse = client.toBlocking().exchange(request, String.class);
@@ -105,6 +107,8 @@ public class UsersController {
 
   /**
    * Method with request for signing out.
+   *
+   *
    */
   @Secured(SecurityRule.IS_AUTHENTICATED)
   @Post(value = "/signout", consumes = MediaType.APPLICATION_JSON)
