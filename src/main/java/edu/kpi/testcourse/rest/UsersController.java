@@ -58,11 +58,9 @@ public class UsersController {
     }
   }
 
-  /**
-   * Method with request for signing in.
-   *
-   *
-   */
+   /**
+    * Method with request for signing in.
+    */
   @Secured(SecurityRule.IS_ANONYMOUS)
   @Post(value = "/signin",
     consumes = MediaType.APPLICATION_JSON,
