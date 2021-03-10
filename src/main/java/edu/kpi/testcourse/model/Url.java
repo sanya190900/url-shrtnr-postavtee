@@ -8,13 +8,13 @@ import edu.kpi.testcourse.Main;
  * Об'єкт посилання.
  */
 public class Url {
-  private long idUrl;
+  private Integer idUrl;
   private String longUrl;
   private String shortUrl;
   private static final String allowedString = "0123456789abcdefghijklmnopqrstuvwxyz"
       + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  private char[] allowedCharacters = allowedString.toCharArray();
-  private int base = allowedCharacters.length;
+  private static char[] allowedCharacters = allowedString.toCharArray();
+  private static int base = allowedCharacters.length;
 
   /**
    * Конструктор для посилання.
@@ -28,7 +28,7 @@ public class Url {
    *
    * @return idUrl - унікальний номер посилання.
    */
-  public long getIdUrl() {
+  public Integer getIdUrl() {
     return idUrl;
   }
 
@@ -55,7 +55,7 @@ public class Url {
    *
    * @param idUrl - унікальний номер.
    */
-  public void setIdUrl(long idUrl) {
+  public void setIdUrl(Integer idUrl) {
     this.idUrl = idUrl;
   }
 
@@ -90,10 +90,10 @@ public class Url {
   /**
    * Функція яка створює короткий аліас.
    *
-   * @param idUrl - довге посилання яке дає користувач.
+   * @param idUrl - довге ідентифікатор посилання.
    * @return - короткий аліас.
    */
-  public String toShort(long idUrl) {
+  public static String toShort(Integer idUrl) {
     var encodedString = new StringBuilder();
 
     if (idUrl == 0) {
