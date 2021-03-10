@@ -1,6 +1,8 @@
 package edu.kpi.testcourse.model;
 
-import java.util.Date;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import edu.kpi.testcourse.Main;
 
 /**
  * Об'єкт посилання.
@@ -8,8 +10,18 @@ import java.util.Date;
 public class Url {
   private long idUrl;
   private String longUrl;
-  private Date createDate;
-  private Date expireDate;
+  private String shortUrl;
+  private static final String allowedString = "0123456789abcdefghijklmnopqrstuvwxyz"
+      + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  private char[] allowedCharacters = allowedString.toCharArray();
+  private int base = allowedCharacters.length;
+
+  /**
+   * Конструктор для посилання.
+   */
+  public Url(String longUrl) {
+    this.longUrl = longUrl;
+  }
 
   /**
    * Метод який повертає унікальний номер посилання.
@@ -30,21 +42,12 @@ public class Url {
   }
 
   /**
-   * Метод який повертає дату створення посилання.
+   * Метод який повертає коротке посилання.
    *
-   * @return createDate - дата створення.
+   * @return longUrl - довге посилання.
    */
-  public Date getCreateDate() {
-    return createDate;
-  }
-
-  /**
-   * Метод який повертає дату створення посилання.
-   *
-   * @return createDate - дата створення.
-   */
-  public Date getExpireDate() {
-    return expireDate;
+  public String getShortUrl() {
+    return shortUrl;
   }
 
   /**
@@ -66,20 +69,42 @@ public class Url {
   }
 
   /**
-   * Метод який встановлює дату створення посилання.
+   * Метод який встановлює значеня короткого посилання.
    *
-   * @param createDate - дата створення.
+   * @param longUrl - довге посилання.
    */
-  public void setCreateDate(Date createDate) {
-    this.createDate = createDate;
+  public void setShortUrl(String longUrl) {
+    this.longUrl = longUrl;
   }
 
   /**
-   * Метод який встановлює дату згасання посилання.
+   * Метод для конвертування посилання в JSON.
    *
-   * @param expireDate - дата згасання.
+   * @return  об'єкт в форматі JSON.
    */
-  public void setExpireDate(Date expireDate) {
-    this.expireDate = expireDate;
+  public JsonObject toJson() {
+    String json =  Main.getGson().toJson(this, Url.class);
+    return JsonParser.parseString(json).getAsJsonObject();
+  }
+
+  /**
+   * Функція яка створює короткий аліас.
+   *
+   * @param idUrl - довге посилання яке дає користувач.
+   * @return - короткий аліас.
+   */
+  public String toShort(long idUrl) {
+    var encodedString = new StringBuilder();
+
+    if (idUrl == 0) {
+      return String.valueOf(allowedCharacters[0]);
+    }
+
+    while (idUrl > 0) {
+      encodedString.append(allowedCharacters[(int) (idUrl % base)]);
+      idUrl = idUrl / base;
+    }
+
+    return encodedString.reverse().toString();
   }
 }
