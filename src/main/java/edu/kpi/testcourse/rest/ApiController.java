@@ -16,7 +16,8 @@ import java.security.Principal;
 @Controller()
 public class ApiController {
 
-  record ExampleClass(String first, String second) {}
+  record ExampleClass(String first, String second) {
+  }
 
   @Get(value = "/hello", produces = MediaType.APPLICATION_JSON)
   public String hello() {
