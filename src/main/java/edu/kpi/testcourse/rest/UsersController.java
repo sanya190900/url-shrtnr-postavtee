@@ -39,8 +39,8 @@ public class UsersController {
    */
   @Secured(SecurityRule.IS_ANONYMOUS)
   @Post(value = "/signup",
-      consumes = MediaType.APPLICATION_JSON,
-      produces = MediaType.APPLICATION_JSON)
+    consumes = MediaType.APPLICATION_JSON,
+    produces = MediaType.APPLICATION_JSON)
   public HttpResponse signUp(@Body JSONObject object) {
     User user = Main.getGson().fromJson(object.toJSONString(), User.class);
     if (user.getPassw() == null) {
@@ -60,11 +60,11 @@ public class UsersController {
 
   /**
    * Method with request for signing in.
-  */
+   */
   @Secured(SecurityRule.IS_ANONYMOUS)
   @Post(value = "/signin",
-      consumes = MediaType.APPLICATION_JSON,
-      produces = MediaType.APPLICATION_JSON)
+    consumes = MediaType.APPLICATION_JSON,
+    produces = MediaType.APPLICATION_JSON)
   public HttpResponse signIn(@Body JSONObject object) {
     User user = Main.getGson().fromJson(object.toJSONString(), User.class);
     if (user.getEmail() == null) {
@@ -76,12 +76,13 @@ public class UsersController {
 
     for (Map.Entry<String, JsonObject> entry : BigTableImpl.dbUsers.entrySet()) {
       if ((user.getEmail()
-          .equals(Main.getGson().fromJson(entry.getValue(), User.class).getEmail()))) {
+        .equals(Main.getGson().fromJson(entry.getValue(), User.class).getEmail()))) {
         user.setIdUser(entry.getKey());
         break;
       }
     }
-      UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(user.getEmail(), user.getPassw());
+    UsernamePasswordCredentials credentials =
+      new UsernamePasswordCredentials(user.getEmail(), user.getPassw());
 
     HttpResponse<String> httpResponse;
 
@@ -113,12 +114,11 @@ public class UsersController {
     if (BigTableImpl.dbTokens.contains(token.split(" ")[1])) {
       token = token.split(" ")[1];
       BigTableImpl.dbTokens.remove(token);
-        return HttpResponse.noContent();
-      } else {
+      return HttpResponse.noContent();
+    } else {
       return HttpResponse.unauthorized();
     }
   }
 
 }
-
 

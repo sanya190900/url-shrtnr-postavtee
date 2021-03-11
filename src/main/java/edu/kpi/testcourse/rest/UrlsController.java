@@ -39,8 +39,8 @@ public class UrlsController {
    */
   @Secured(SecurityRule.IS_AUTHENTICATED)
   @Post(value = "/shorten",
-    consumes = MediaType.APPLICATION_JSON,
-    produces = MediaType.APPLICATION_JSON)
+      consumes = MediaType.APPLICATION_JSON,
+      produces = MediaType.APPLICATION_JSON)
   public MutableHttpResponse<String> shortenUrl(@Header("Authorization") String token,
                                                 @Body JSONObject object, Principal principal) {
     if (BigTableImpl.dbTokens.contains(token.replaceFirst("Bearer[ ]+", ""))) {
@@ -81,8 +81,8 @@ public class UrlsController {
    */
   @Secured(SecurityRule.IS_AUTHENTICATED)
   @Delete(value = "/{shortUrl}",
-    consumes = MediaType.APPLICATION_JSON,
-    produces = MediaType.APPLICATION_JSON)
+      consumes = MediaType.APPLICATION_JSON,
+      produces = MediaType.APPLICATION_JSON)
   public MutableHttpResponse<String> deleteUrl(@Header("Authorization") String token,
                                                @Body String shortUrl, Principal principal) {
     if (BigTableImpl.dbTokens.contains(token.split(" ")[1])) {
@@ -114,8 +114,8 @@ public class UrlsController {
    */
   @Secured(SecurityRule.IS_AUTHENTICATED)
   @Get(value = "/",
-    consumes = MediaType.APPLICATION_JSON,
-    produces = MediaType.APPLICATION_JSON)
+      consumes = MediaType.APPLICATION_JSON,
+      produces = MediaType.APPLICATION_JSON)
   public MutableHttpResponse<String> listUrls(@Header("Authorization") String token,
                                               Principal principal) {
     if (BigTableImpl.dbTokens.contains(token.split(" ")[1])) {
