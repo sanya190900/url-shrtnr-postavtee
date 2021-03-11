@@ -39,8 +39,8 @@ public class UsersController {
    */
   @Secured(SecurityRule.IS_ANONYMOUS)
   @Post(value = "/signup",
-      consumes = MediaType.APPLICATION_JSON,
-      produces = MediaType.APPLICATION_JSON)
+        consumes = MediaType.APPLICATION_JSON,
+        produces = MediaType.APPLICATION_JSON)
   public HttpResponse signUp(@Body JSONObject object) {
     User user = Main.getGson().fromJson(object.toJSONString(), User.class);
     if (user.getPassw() == null) {
@@ -63,8 +63,8 @@ public class UsersController {
   */
   @Secured(SecurityRule.IS_ANONYMOUS)
   @Post(value = "/signin",
-      consumes = MediaType.APPLICATION_JSON,
-      produces = MediaType.APPLICATION_JSON)
+        consumes = MediaType.APPLICATION_JSON,
+        produces = MediaType.APPLICATION_JSON)
   public HttpResponse signIn(@Body JSONObject object) {
     User user = Main.getGson().fromJson(object.toJSONString(), User.class);
     if (user.getEmail() == null) {
