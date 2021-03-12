@@ -20,12 +20,12 @@ import org.reactivestreams.Publisher;
 public class UserAuth implements AuthenticationProvider {
   @Override
   public Publisher<AuthenticationResponse> authenticate(@Nullable HttpRequest<?> httpRequest,
-    AuthenticationRequest<?,
+      AuthenticationRequest<?,
       ?> authenticationRequest) {
     return Flowable.create(emitter -> {
       emitter.onNext(
-        new UserDetails((String) authenticationRequest.getIdentity(),
-          new ArrayList<>())
+          new UserDetails((String) authenticationRequest.getIdentity(),
+            new ArrayList<>())
       );
       emitter.onComplete();
     }, BackpressureStrategy.ERROR);
