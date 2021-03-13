@@ -70,11 +70,9 @@ public class Url {
 
   /**
    * Метод який встановлює значеня короткого посилання.
-   *
-   * @param longUrl - довге посилання.
    */
-  public void setShortUrl(String longUrl) {
-    this.longUrl = longUrl;
+  public void setShortUrl(String shortUrl) {
+    this.shortUrl = shortUrl;
   }
 
   /**
