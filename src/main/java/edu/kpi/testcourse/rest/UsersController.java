@@ -43,7 +43,7 @@ public class UsersController {
       produces = MediaType.APPLICATION_JSON)
   public HttpResponse signUp(@Body JSONObject object) {
     User user = Main.getGson().fromJson(object.toJSONString(), User.class);
-    if (user.getPassw() == null) {
+    if (user.getPassword() == null) {
       return HttpResponse.badRequest("No password specified");
     }
     if (user.getEmail() == null) {
@@ -70,7 +70,7 @@ public class UsersController {
     if (user.getEmail() == null) {
       return HttpResponse.badRequest("Please, provide a valid email");
     }
-    if (user.getPassw() == null) {
+    if (user.getPassword() == null) {
       return HttpResponse.badRequest("Please, provide a valid password");
     }
 
@@ -82,13 +82,13 @@ public class UsersController {
       }
     }
     UsernamePasswordCredentials credentials =
-        new UsernamePasswordCredentials(user.getEmail(), user.getPassw());
+        new UsernamePasswordCredentials(user.getEmail(), user.getPassword());
 
     HttpResponse<String> httpResponse;
 
     User response = UrlAndUserActions.findUserByEmail(user.getEmail());
     if (response != null) {
-      boolean isPasswordValid = UrlAndUserActions.checkPassw(user.getEmail(), user.getPassw());
+      boolean isPasswordValid = UrlAndUserActions.checkPassw(user.getEmail(), user.getPassword());
       if (isPasswordValid) {
         HttpRequest request = HttpRequest.POST("/login", credentials);
         httpResponse = client.toBlocking().exchange(request, String.class);
