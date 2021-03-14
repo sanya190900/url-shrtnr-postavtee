@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class User {
   private String email;
-  private String passw;
+  private String password;
   private transient String idUser;
   private ArrayList<String> urlList;
 
@@ -18,12 +18,12 @@ public class User {
    * Конструктор для юзера.
    *
    * @param email   емейл користувача.
-   * @param passw   пароль користувача.
+   * @param password   пароль користувача.
    * @param urlList список посилань, створених користувачем.
    */
-  public User(String email, String passw, ArrayList<String> urlList) {
+  public User(String email, String password, ArrayList<String> urlList) {
     this.email = email;
-    this.passw = passw;
+    this.password = password;
     this.urlList = urlList;
   }
 
@@ -50,17 +50,17 @@ public class User {
    *
    * @return passw   пароль користувача.
    */
-  public String getPassw() {
-    return passw;
+  public String getPassword() {
+    return password;
   }
 
   /**
    * Функція, для встановлення пароля.
    *
-   * @param passw пароль користувача.
+   * @param password пароль користувача.
    */
-  public void setPassw(String passw) {
-    this.passw = passw;
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   /**
@@ -126,7 +126,7 @@ public class User {
     }
     User user = (User) o;
     return Objects.equals(email, user.email) && Objects
-      .equals(passw, user.passw) && Objects.equals(idUser, user.idUser);
+      .equals(password, user.password) && Objects.equals(idUser, user.idUser);
   }
 
   /**
@@ -136,7 +136,7 @@ public class User {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(email, passw, idUser);
+    return Objects.hash(email, password, idUser);
   }
 
   /**
@@ -148,7 +148,7 @@ public class User {
   public String toString() {
     return "User{"
       + "email='" + email + '\''
-      + ", password='" + passw + '\''
+      + ", password='" + password + '\''
       + ", idUser='" + idUser + '\''
       + '}';
   }

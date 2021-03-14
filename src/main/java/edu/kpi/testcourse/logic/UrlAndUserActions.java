@@ -24,7 +24,7 @@ public class UrlAndUserActions {
    * @return результат створення.
    */
   public static boolean createUser(User u) {
-    u.setPassw(hash(u.getPassw()));
+    u.setPassword(hash(u.getPassword()));
     u.createUrlList();
     if (BigTableImpl.dbUsers.isEmpty()) {
       BigTableImpl.dbUsers.put(u.getIdUser(), u.toJson());
@@ -103,7 +103,7 @@ public class UrlAndUserActions {
       if ((emailFromRequest.equals(Main.getGson().fromJson(entry.getValue(), User.class)
           .getEmail()))
           && (hash(passwFromRequest).equals(Main.getGson().fromJson(entry.getValue(), User.class)
-          .getPassw()))) {
+          .getPassword()))) {
         return true;
       }
     }
