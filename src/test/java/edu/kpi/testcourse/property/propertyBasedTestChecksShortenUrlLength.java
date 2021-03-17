@@ -19,7 +19,7 @@ public class propertyBasedTestChecksShortenUrlLength {
       .withExamples(100)
       .forAll(
         strings().basicLatinAlphabet().ofLengthBetween(15, 20),
-        integers().between(1, 11)
+        integers().between(1, 101)
       ).check((fullUrl, id) -> {
       String shortUrl = Url.toShort(id);
       UrlAndUserActions.saveUrl(shortUrl, fullUrl);
