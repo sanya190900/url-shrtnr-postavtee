@@ -26,7 +26,6 @@ public class propertyBasedTestForCreatingUsers {
       User user = new User(email, password, new ArrayList<>());
       user.setIdUser(UUID.randomUUID().toString());
       UrlAndUserActions.createUser(user);
-      System.out.println(BigTableImpl.dbUsers.size());
       return UrlAndUserActions.findUserByEmail(email) != null;
     });
   }
